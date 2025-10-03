@@ -1,5 +1,8 @@
 body {
-  margin: 0;
-  font-family: "Arial", sans-serif;
-  background-color: #fff7fa;
+  margin: 0; /* Remove a margem padrão do navegador */
+  padding: 0; /* Adiciona reset de padding para evitar espaçamentos indesejados */
+  font-family: Arial, Helvetica, sans-serif; /* Adiciona uma fonte de fallback extra */
+  background-color: #fff7fa; /* Cor de fundo suave */
+  line-height: 1.6; /* Melhor legibilidade do texto */
+  color: #333; /* Cor de texto padrão, melhor contraste */
 }
