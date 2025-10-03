@@ -10,7 +10,7 @@ export async function getStaticProps() {
   let files = [];
 
   try {
-    files = fs.readdirSync(assetsDir).map(file => {
+    files = fs.readdirSync(assetsDir).map((file) => {
       const filePath = path.join(assetsDir, file);
       const stats = fs.statSync(filePath);
       const ext = path.extname(file).toLowerCase();
@@ -27,11 +27,11 @@ export async function getStaticProps() {
         date: stats.mtime.toLocaleDateString(),
         isImage,
         url: `/assets/${file}`,
-        category
+        category,
       };
     });
   } catch (error) {
-    console.error("Erro ao ler /assets:", error);
+    console.error("Erro ao ler /public/assets:", error);
   }
 
   return { props: { files } };
@@ -43,46 +43,88 @@ export default function Home({ files }) {
 
   const categories = ["Todos", "Bolos", "Doces", "Sobremesas", "Outros"];
 
-  const filteredFiles = files.filter(file =>
-    (filter === "Todos" || file.category === filter) &&
-    file.name.toLowerCase().includes(search.toLowerCase())
+  const filteredFiles = files.filter(
+    (file) =>
+      (filter === "Todos" || file.category === filter) &&
+      file.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div style={{ backgroundColor: "#fff7fa", minHeight: "100vh" }}>
       <Header />
-      <main style={{ maxWidth: "1200px", margin: "2rem auto", padding: "1rem" }}>
-        <div style={{
-          backgroundColor: "#ff7ba9",
-          padding: "2rem",
-          textAlign: "center",
-          color: "#fff",
-          borderRadius: "12px",
-          marginBottom: "2rem"
-        }}>
-          <h1 style={{ fontSize: "2.2rem", margin: 0 }}>Bem-vindo à Gabicake Confeitaria 🍰</h1>
-          <p style={{ fontSize: "1.2rem", marginTop: "0.5rem" }}>Delícias irresistíveis feitas com amor 💖</p>
+      <main
+        style={{
+          maxWidth: "1200px",
+          margin: "2rem auto",
+          padding: "1rem",
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "#ff7ba9",
+            padding: "2rem",
+            textAlign: "center",
+            color: "#fff",
+            borderRadius: "12px",
+            marginBottom: "2rem",
+          }}
+        >
+          <h1 style={{ fontSize: "2.2rem", margin: 0 }}>
+            Bem-vindo à GabiCake Confeitaria 🍰
+          </h1>
+          <p style={{ fontSize: "1.2rem", marginTop: "0.5rem" }}>
+            Delícias irresistíveis feitas com amor 💖
+          </p>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: "1.5rem", gap: "1rem", flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "1.5rem",
+            gap: "1rem",
+            flexWrap: "wrap",
+          }}
+        >
           <input
             type="text"
             placeholder="Buscar produto..."
             value={search}
-            onChange={e => setSearch(e.target.value)}
-            style={{ padding: "0.6rem 1rem", borderRadius: "8px", border: "1px solid #ddd", width: "220px" }}
+            onChange={(e) => setSearch(e.target.value)}
+            style={{
+              padding: "0.6rem 1rem",
+              borderRadius: "8px",
+              border: "1px solid #ddd",
+              width: "220px",
+            }}
           />
-          <select value={filter} onChange={e => setFilter(e.target.value)} style={{ padding: "0.6rem 1rem", borderRadius: "8px", border: "1px solid #ddd" }}>
-            {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+          <select
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            style={{
+              padding: "0.6rem 1rem",
+              borderRadius: "8px",
+              border: "1px solid #ddd",
+            }}
+          >
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
           </select>
         </div>
 
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-          gap: "1.5rem"
-        }}>
-          {filteredFiles.map(file => <ProductCard key={file.name} product={file} />)}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+            gap: "1.5rem",
+          }}
+        >
+          {filteredFiles.map((file) => (
+            <ProductCard key={file.name} product={file} />
+          ))}
         </div>
       </main>
       <Footer />
