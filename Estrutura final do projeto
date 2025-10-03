@@ -1,0 +1,17 @@
+gabicake-confeitaria/
+│
+├─ package.json
+├─ next.config.js
+├─ pages/
+│   └─ index.js
+├─ public/
+│   └─ assets/
+│        ├─ bolo_chocolate.jpg
+│        ├─ doce_branco.jpg
+│        └─ sobremesa_morango.png
+├─ components/
+│   ├─ Header.js
+│   ├─ Footer.js
+│   └─ ProductCard.js
+└─ styles/
+    └─ globals.css
