@@ -1,0 +1,3 @@
+public/
+└─ assets/
+   └─ bolo1.jpg   ← qualquer imagem, mesmo teste
