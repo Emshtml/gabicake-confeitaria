@@ -1,11 +1,13 @@
-import fs from "fs";
-import path from "path";
 import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
 
 export async function getStaticProps() {
+  // ✅ Importa fs e path apenas no servidor
+  const fs = await import("fs");
+  const path = await import("path");
+
   const assetsDir = path.join(process.cwd(), "public/assets");
   let files = [];
 
@@ -31,7 +33,7 @@ export async function getStaticProps() {
       };
     });
   } catch (error) {
-    console.error("Erro ao ler /public/assets:", error);
+    console.error("❌ Erro ao ler /public/assets:", error);
   }
 
   return { props: { files } };
@@ -131,3 +133,4 @@ export default function Home({ files }) {
     </div>
   );
 }
+ 
